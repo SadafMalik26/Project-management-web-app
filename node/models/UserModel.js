@@ -15,6 +15,21 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add the user password"],
     },
+ phone:{
+  type: String,
+  required: [true, "Please add the user password"],
+},
+
+adress:{
+  type: String,
+  required: [true, "Please add the user password"],
+},
+
+date:{
+  type: String,
+  required: [true, "Please add the user password"],
+},
+
     type: {
       type: String,
       required:[true],

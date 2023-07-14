@@ -1,0 +1,53 @@
+.content-header {
+    background-color: #ffffff; /* Set a light and attractive background color */
+    color: #000000; /* Set the text color */
+    padding: 10px; /* Set 10 pixels of padding */
+    font-size: 24px; /* Set the font size */
+    font-weight: bold; /* Set the font weight */
+    border:1px solid #000000;
+    border-top: 10px solid #1522b2; /* Add a bottom border with 1 pixel width and black color */
+    
+
+}
+.admin-heading {
+    color: #3273ab; /* Set the desired text color */
+    font-size: 28px; /* Set the desired font size */
+  }
+  
+  .admin-heading i {
+    margin-right: 10px; /* Adjust the spacing between the icon and the text */
+  }
+  
+  .label{
+    font-size:18px;
+    font-weight: bold;
+    
+  }
+  .input{
+    font-size:18px;
+     height:70px;
+     border-radius:10px ;
+     border:3px solid #000000;
+     
+    
+  }
+  .input2{
+    font-size:18px;
+     height:50px;
+     border-radius:10px ;
+     border:3px solid #000000;
+     
+    
+  }
+
+  .alert{
+    padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  }
+     .form{
+      size:100px;
+     }

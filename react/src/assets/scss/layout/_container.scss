@@ -2,9 +2,11 @@
   min-height: 100vh;
 }
 .contentArea {
+  position: relative;
   flex-grow: 1;
-  max-width: 1300px;
-  margin: 0 auto;
+  max-width: 16000px;
+  margin: 0 ;
+  background-color: #F0F8FF;
 }
 .card {
   box-shadow: $card-box-shadow;

@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
-import {
-    Container, Row, Col, Form, FormGroup, Label, Input, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter
-    , InputGroup,
-    Alert } from 'reactstrap';
+import {Container, Row, Col, Form, FormGroup, Label, Input, Button, Table, Modal, ModalHeader, ModalBody, ModalFooter
+    , InputGroup,Alert } from 'reactstrap';
+    import '../employee.css';
 import {  useAddEmployee } from '../hooks/employee';
 import { All } from '../components/employee/All';
 import { useAuth } from '../hooks/authentication';
+
 
 
 export function Employee() {
@@ -23,6 +23,10 @@ export function Employee() {
     const [password, setPassword] = useState('')
     const [passwordError, setPasswordError] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+    
+    const [phone, setPhone] = useState('');
+    const [adress, setAdress] = useState('');
+    const [date, setDate] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
     
     
@@ -42,60 +46,114 @@ export function Employee() {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let add = await addEmployee.mutateAsync({ username, email, password, selectedImage })
+        let add = await addEmployee.mutateAsync({ username, email, password,phone,adress,date,selectedImage })
         setUserName('')
         setEmail('')
         setPassword('')
+        setPhone('')
+        setAdress('')
+        setDate('')
         setModal(!modal)
     };
     
     return (
         <>
-        <Container>
+        <Container >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</link>
+<h1 class="admin-heading">
+  <i class="fas fa-star"></i>
+  Admin
+</h1>
+<br/>
+
+
+        <Container className='content-header'>
+
         <Row>
         
         {(addEmployee.isSuccess) ?
-            <Alert color='success'>Employee Added!</Alert> : "" }
+            <Alert className='alert'>Employee Added!</Alert> : "" }
             <Col lg={12}>
             {auth?.type=="Admin" ? 
-            <Button className='float-end' color="primary" onClick={()=>setModal(!modal)}><i class="bi bi-plus"></i> Add New</Button> : "  " }
-            <Modal isOpen={modal} toggle={()=>setModal(!modal)}>
-            <ModalHeader toggle={()=>setModal(!modal)}>Add Employee Details</ModalHeader>
-            <ModalBody>
+            <Button className="float-end" style={{ backgroundColor: '#3273ab' }} onClick={()=>setModal(!modal)}><i class="bi bi-plus">  </i>   Add New</Button> : "  " }
             
+            
+            <Modal isOpen={modal} toggle={() => setModal(!modal)} size="xl">
+  <ModalHeader toggle={() => setModal(!modal)}>
+    
+    <b style={{fontSize:"26px"}}>Add Employee Details</b>
+  </ModalHeader>
+  <ModalBody>
+
+
             {(addEmployee.isError) ?
-                <Alert color='danger'>{addEmployee.error.response.data.message}</Alert> : "" }
+                <Alert style={{ Color: '#3273ab' }} >{addEmployee.error.response.data.message}</Alert> : "" }
                 
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}><Form onSubmit={handleSubmit}>
+  <Row className="form-row">
+    <Col>
+    <FormGroup className="form-group">
+      <Label className="label">Username</Label>
+      <Input
+        className="input"
+        placeholder="Enter Employee name"
+        value={username}
+        onChange={(e) => setUserName(e.target.value)}
+      />
+    </FormGroup></Col>
+    <Col>
+    <FormGroup className="form-group">
+      <Label className="label">Email</Label>
+      <Input  className="input"
+        type="email"
+        name={email}
+        value={email}
+        valid={emailError}
+        invalid={!emailError}
+        onChange={(e) => handleUserEmail(e.target.value)}
+      />
+    </FormGroup></Col>
+  </Row>
+</Form>
+<Row><Col>
                 <FormGroup>
-                <Label for="name">Username</Label>
-                <Input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Enter teacher's name"
-                value={username}
-                onChange={(e) => setUserName(e.target.value)} />
+                <Label className="label">Phone Number</Label>
+                <Input className="input"
+                placeholder=" Enter a valid Phone Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)} />
                 </FormGroup>
+                </Col>
+                <Col>
                 <FormGroup>
-                <Label for="email">Email</Label>
-                <Input
-                type="email"
-                name={email}
-                value={email}
-                valid={emailError}
-                invalid={!emailError}
-                onChange={(e) => handleUserEmail(e.target.value)} />
+                <Label className="label">Home Address</Label>
+                <Input className="input"
+                
+                placeholder=" Enter Your Home Address"
+                value={adress}
+                onChange={(e) => setAdress(e.target.value)} />
+                </FormGroup>
+                </Col></Row>
+
+                <FormGroup>
+                
+                <Label className="label">Date of Creation</Label>
+                <Input className="input"
+                type="date"
+                name="date"
+                value="date"
+                onChange={(e) => setDate(e.target.value)} />
                 </FormGroup>
                 
-                
+
                 <FormGroup >
                 <Label
-                for="image"
+               className="label"
                 >
                 Cover
                 </Label>
-                <Input
+                <Input className="input2"
                 id="image"
                 name="image"
                 type="file"
@@ -107,11 +165,11 @@ export function Employee() {
                 </FormGroup>
                 
                 <FormGroup>
-                <Label for="examplePassword">
+                <Label className="label">
                 Password
                 </Label>
                 <InputGroup>
-                <Input
+                <Input className="input"
                 id="examplePassword"
                 name={password}
                 value={password}
@@ -140,6 +198,7 @@ export function Employee() {
                 
                 </Col>
                 </Row>
+                </Container>
                 </Container>
                 </>
                 )

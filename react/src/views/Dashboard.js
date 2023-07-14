@@ -22,8 +22,8 @@ export function Dashboard() {
   return (
     <div className="container">
         
-        <h2 style={{ fontSize: '40px', color: 'blue', fontWeight: 'bold' }}>
-  <FontAwesomeIcon icon={faCog} style={{ marginRight: '10px' }} />
+        <h2 style={{ fontSize: '40px', color: '#3273ab', fontWeight: 'bold' }}>
+  <FontAwesomeIcon icon={faCog} style={{ marginRight:'10px' }} />
   Dashboard
 </h2><br/>
     

@@ -11,6 +11,11 @@ const navigation = [
   },
   {
     title: "Admins",
+    href: "/home/employee",
+    icon: "bi bi-star",
+  },
+  {
+    title: "-----",
     href: "/home/teacher",
     icon: "bi bi-person-fill",
   },
@@ -19,11 +24,7 @@ const navigation = [
     href: "/home/mySlots",
     icon: "bi bi-bookmark-fill",
   },
-  {
-    title: "Employee",
-    href: "/home/employee",
-    icon: "bi bi-person-fill",
-  },
+ 
 
   {
     title: "Designations",

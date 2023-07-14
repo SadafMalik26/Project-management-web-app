@@ -25,7 +25,7 @@ const list = asyncHandler(async (req, res) => {
 const add = asyncHandler(async (req, res) => {
   
   try {
-  const { email, username, password } = req.body
+  const { email, username, password  } = req.body
 
 
     const cover = {
@@ -33,7 +33,7 @@ const add = asyncHandler(async (req, res) => {
       contentType: 'image/jpeg'
     }
     const user = await User.create({
-      email, username, password, type, cover
+      username, email, password,phone,adress,date,type,cover
     });
 
     if (user) {

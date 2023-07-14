@@ -21,6 +21,10 @@ export const All = () => {
   
     const sortedList = sortedEmployees.length > 0 ? sortedEmployees : employees;
   
+    const viewDetails = (id) => {
+      navigate(`details/${id}`)
+  }
+  
     const edit = (id) => {
       navigate("/home/updateProfile", { state: { id } });
     };
@@ -78,6 +82,11 @@ export const All = () => {
                       </Button>{" "}
                     </>
                   )}
+                  
+                  <Button color="warning"
+                                    onClick={() => viewDetails(employee._id)}
+                                ><FontAwesomeIcon icon={faEye} /></Button>
+                        
                 </td>
               </tr>
             ))}
