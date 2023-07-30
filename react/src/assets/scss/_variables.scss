@@ -6,7 +6,8 @@ $font-family-sans-serif: "Montserrat", sans-serif;
 /*******************/
 // Theme Colors
 /********************/
-$primary: #2962ff;
+$primary: rgba(43, 87, 136, 0.771);
+$pri:  rgba(255, 255, 255, 0.1);
 $info: #26c6da;
 $danger: #f62d51;
 $success: #39c449;
@@ -17,6 +18,7 @@ $secondary: #35363b;
 
 $theme-colors: (
   "primary": $primary,
+  "pri": $pri,
   "secondary": $secondary,
   "success": $success,
   "info": $info,

@@ -6,13 +6,20 @@ const meetingSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'group',
         },
-        teacher: {
+        admin: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'user',
         },
         currentDate:{
             type:String
         },
+        title:{
+            type:String
+        },
+         description:{
+            type:String
+        },
+        
         attendees: [
             {
                 employee: {

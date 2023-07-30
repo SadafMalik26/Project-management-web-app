@@ -16,16 +16,16 @@ export const useAuth = () => {
 }
 
 
-// //get auth user notification
-// export const useNotification= () => {
-//     return useQuery({
-//         queryKey: ['Notification'],
-//         queryFn: () =>
-//             axios
-//                 .get(`http://localhost:5001/user/notification`)
-//                 .then((res) => res.data.notifcations)
-//     })
-// }
+//get auth user notification
+export const useNotification= () => {
+    return useQuery({
+        queryKey: ['Notification'],
+        queryFn: () =>
+            axios
+                .get(`http://localhost:5001/user/notification`)
+                .then((res) => res.data.notifcations)
+    })
+}
 
 //get  user
 export const useUser = (id) => {
@@ -84,7 +84,8 @@ export const useDeleteUser = () => {
                 .delete(`http://localhost:5001/user/${id}`)
                 .then((res) => res.data)
         }, onSettled: () => {
-            queryClient.invalidateQueries({ queryKey: ['Employees'] })
+            queryClient.invalidateQueries({ queryKey: ['Admins'] })
+            queryClient.invalidateQueries({ queryKey: ['employees'] })
         }
     })
 }

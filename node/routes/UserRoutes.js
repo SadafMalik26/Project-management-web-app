@@ -35,7 +35,6 @@ router.get("/:id", get);
 
 router.put("/", upload.single('selectedImage'), update);
 router.put("/forget",pass);
-router.post("/reset",pass);
 
 
 module.exports = router;

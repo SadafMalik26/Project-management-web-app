@@ -3,8 +3,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
-
-//get Employee user
+ 
+//get employee count
 export const useEmployeeCount = () => {
     return useQuery({
         queryKey: ['CountEmployee'],
@@ -14,29 +14,28 @@ export const useEmployeeCount = () => {
                 .then((res) => res.data.employeeCount)
     })
 }
-
-
-//get single employee
-export const useEmployeeDetails = (id) => {
-    return useQuery({
-        queryKey: ['EmployeeDetails'],
-        queryFn: () => {
-
-            return axios
-                .get(`http://localhost:5002/employee/details${id}`)
-                .then((res) => res.data.employee)
-        }
-
-    })
-}
-//get Employee
+//get employee
 export const useEmployee = () => {
     return useQuery({
-        queryKey: ['employees'],
+        queryKey: ['Employees'],
         queryFn: () =>
             axios
                 .get(`http://localhost:5001/employee/`)
                 .then((res) => res.data.employees)
+    })
+}
+
+//get single employee
+export const useEmployeeQualificationDetails = (id) => {
+    return useQuery({
+        queryKey: ['EmployeeDetails'],
+        queryFn: () => {
+
+             return axios
+                .get(`http://localhost:5001/employee/qualification/${id}`)
+                .then((res) => res.data.employee)
+        }
+
     })
 }
 
@@ -61,7 +60,8 @@ export const useAddEmployee = () => {
 
             return { 'message': 'error' }
         }, onSettled: (res) => {
-            queryClient.invalidateQueries({ queryKey: ['employees'] })
+            queryClient.invalidateQueries({ queryKey: ['Employees'] })
         }
     })
 }
+

@@ -36,14 +36,7 @@ const list = asyncHandler(async (req, res) => {
             },
         }
         
-        const employee1Lookup =  {
-            $lookup: {
-                from: "users",
-                localField: "employee1",
-                foreignField: "_id",
-                as: "employee1",
-            },
-        }
+      
         
         const employee2Lookup = {
             $lookup: {
@@ -54,14 +47,7 @@ const list = asyncHandler(async (req, res) => {
             },
         }
         
-        const employee3Lookup={
-            $lookup: {
-                from: "users",
-                localField: "employee3",
-                foreignField: "_id",
-                as: "employee3",
-            },
-        }
+      
         
         const projectLookup =  {
             $lookup: {
@@ -75,24 +61,22 @@ const list = asyncHandler(async (req, res) => {
         const project = {
             $project: {
                 supervisor: { $arrayElemAt: ["$supervisor", 0] },
-                employee1: { $arrayElemAt: ["$employee1", 0] },
-                employee2: { $arrayElemAt: ["$employee2", 0] },
-                employee3: { $arrayElemAt: ["$employee3", 0] },
+               employee2: { $arrayElemAt: ["$employee2", 0] },
                 project: { $arrayElemAt: ["$project", 0] },
             },
         }
         
         
-        if(type == "Teacher"){
+        if(type == "Admin"){
             const supervisor = details.user.id
             projects = await Group.aggregate([{
                 $match: {
                     supervisor : new ObjectId(supervisor),
                 },
-            },employee1Lookup,employee2Lookup,employee3Lookup,projectLookup,supervisorLookup,project])
+            },employee2Lookup,projectLookup,supervisorLookup,project])
         }
-        else if(type == "Admin"){
-            projects = await Group.aggregate([employee1Lookup,employee2Lookup,employee3Lookup,projectLookup,supervisorLookup,project])
+        else if(type == "Manager"){
+            projects = await Group.aggregate([employee2Lookup,projectLookup,supervisorLookup,project])
         }
         
         res.status(200).json({ projects });
@@ -102,15 +86,15 @@ const list = asyncHandler(async (req, res) => {
     
 })
 
-const count = asyncHandler(async (req, res , next ) => {
+const count = asyncHandler(async (req, res) => {
     
-     const acceptedCount = await Project.find({ status:"accepted" }).count()
-     const requirementCount = await Project.find({ status:"requirement" }).count()
-     const propCount = await Project.find({ status:"proposel" }).count()
-     const defenseCount = await Project.find({ status:"defense" }).count()
+    const proposedCount = await Project.find({ status:"proposed" }).count()
+    const acceptedCount = await Project.find({ status:"accepted" }).count()
+    const requirementCount = await Project.find({ status:"requirement" }).count()
+    const defenseCount = await Project.find({ status:"defense" }).count()
     const midCount = await Project.find({ status:"mid" }).count()
     const completedCount = await Project.find({ status:"completed" }).count()
-    res.status(200).json({ acceptedCount,requirementCount,propCount,defenseCount,defenseCount,midCount,completedCount});
+    res.status(200).json({ proposedCount, acceptedCount,requirementCount,defenseCount,defenseCount,midCount,completedCount});
     
 })
 
@@ -123,14 +107,16 @@ const add = asyncHandler(async (req, res) => {
         
         const { title, details } = req.body
        
-        
+        const proposal = {
+            data: fs.readFileSync((process.cwd() + '/uploads/' + req.files.proposal[0].filename)),
+        }
     
         const project = await Project.create({
-            title, details,status: 'none'
+            title, details, status: 'none', proposal_document: proposal
         });
         
         employee = tokenDetails.user.id
-        const filter = { $or: [{ 'employee1': employee }, { 'employee2': employee }, { 'employee3': employee }] };
+        const filter = { $or: [{ 'employee2': employee }] };
         const update =  { $set:{ project: project._id }};
         
         const group = await Group.findOneAndUpdate(filter, update)
@@ -156,8 +142,8 @@ const myProject = asyncHandler(async (req, res) => {
         const details = jwt.decode(token)
         
         employee = details.user.id
-        const filter = { $or: [{ 'employee1': employee }, { 'employee2': employee }, { 'employee3': employee }] };
-        const groupProject = await Group.findOne(filter).populate("project employee1 employee2 employee3 supervisor")
+        const filter = { $or: [{ 'employee2': employee }] };
+        const groupProject = await Group.findOne(filter).populate("project employee2 supervisor")
         
         res.status(200).json({  groupProject });
     } catch (err) {
@@ -179,8 +165,6 @@ try {
     
     if(status == 'requirement')
      project = await Project.findByIdAndUpdate(id,{requirement_document:file,status})
-     else if(status == 'proposel')
-     project = await Project.findByIdAndUpdate(id,{prop_document:file,status})
     else if(status == 'defense')
      project = await Project.findByIdAndUpdate(id,{defense_document:file,status})
      else if(status == 'mid')

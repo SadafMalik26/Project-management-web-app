@@ -12,7 +12,6 @@ const ObjectId = require('mongoose').Types.ObjectId;
 var fs = require('fs');
 const GroupChatModel = require("../models/GroupModel");
 const MeetingModel = require("../models/MeetingModel");
-const TeacherModel = require("../models/TeacherModel");
 const NotificationModel = require("../models/NotificationModel");
 
 //Login user
@@ -28,14 +27,14 @@ const loginUser = asyncHandler(async (req, res) => {
     
     let auth;
     
-    if (type == 'Admin') {
+    if (type == 'Manager') {
       
       auth = {
         _id: new ObjectId("6450cacf9c60caad5198c9cb"),
-        email: 'admin@uow.edu.pk',
-        password: 'admin123',
-        username: 'admin',
-        type: 'Admin'
+        email: 'manager@manager.com',
+        password: 'manager123',
+        username: 'manager',
+        type: 'Manager'
       }
     }
     else
@@ -85,7 +84,7 @@ const authUser = asyncHandler(async (req, res) => {
       const type = details.user.type
       const id = details.user.id
       
-      const filter = { $or: [{ 'employee1': id }, { 'employee2': id }, { 'employee3': id }] };
+      const filter = { $or: [{ 'employee2': id }] };
       
       var hasGroup = false
       var meet
@@ -118,7 +117,7 @@ const authUser = asyncHandler(async (req, res) => {
         ])
         
         meet = meet[0]
-      }else if(type == 'Admin'){
+      }else if(type == 'Manager'){
         const meetings = await Meeting.find()
         
         // meets = countMeets(meetings)
@@ -164,7 +163,7 @@ const deleteUser=asyncHandler(async(req,res)=>{
   try {
     const {id}=req.params
     
-    const filter = { $or: [{ 'employee1': id }, { 'employee2': id }, { 'employee3': id } , {'supervisor':id}] };
+    const filter = { $or: [{ 'employee2': id }, {'supervisor':id}] };
     const group = await Group.findOne(filter)
     
     const chatfilter = {$or: [{'sender':id},{'receiver':id}]}
@@ -177,8 +176,7 @@ const deleteUser=asyncHandler(async(req,res)=>{
       
     }
     
-    const teacher = await TeacherModel.findOneAndRemove({'user':id})
-    
+   
     const filterMeet = {
       'attendees.employee': id
     };

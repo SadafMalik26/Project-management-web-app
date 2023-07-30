@@ -8,19 +8,20 @@ const Notification = require("../models/NotificationModel");
 
 
 const add = asyncHandler(async (req, res) => {
-  const {id,attendees,currentDate} = req.body
+  const {id,attendees,currentDate, title, description} = req.body
   
   const token = req.cookies.jwt
   const details = jwt.decode(token)
-  const teacher = details.user.id
+  const admin = details.user.id
   
-  const meeting = await Meeting.create({group:id,attendees,currentDate,teacher})
+  const meeting = await Meeting.create({group:id,attendees,currentDate,admin,title,description})
   
   if(meeting)
   {
     
     res.status(200).json({'message':'Success!' });
   }
+  
   
 })
 
@@ -33,13 +34,13 @@ const list = asyncHandler(async (req, res) => {
   
   var meetings
   
-  if(type == 'Teacher')
+  if(type == 'Admin')
   {
-    meetings= await Meeting.find({'teacher':id}).populate("attendees.employee", "username");
+    meetings= await Meeting.find({'admin':id}).populate("attendees.employee", "username");
   }
   if(type == 'Employee')
   {
-    const filter = { $or: [{ 'employee1': id }, { 'employee2': id }, { 'employee3': id }] };
+    const filter = { $or: [ { 'employee2': id }] };
     const group = await Group.findOne(filter)
     
     meetings= await Meeting.find({group}).populate("attendees.employee", "username")

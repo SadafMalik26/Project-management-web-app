@@ -3,31 +3,29 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/authentication";
 
 const navigation = [
- 
   {
     title: "Dashboard",
     href: "/home/",
     icon: "bi bi-house",
   },
   {
-    title: "Admins",
-    href: "/home/employee",
-    icon: "bi bi-star",
+    title: "Admin",
+    href: "/home/admin",
+    icon: "bi bi-star-fill",
   },
   {
-    title: "-----",
-    href: "/home/teacher",
+    title: "Employee",
+    href: "/home/employee",
     icon: "bi bi-person-fill",
   },
   {
-    title: "Categories",
+    title: "Bookings",
     href: "/home/mySlots",
     icon: "bi bi-bookmark-fill",
   },
  
-
   {
-    title: "Designations",
+    title: "Groups",
     href: "/home/groups",
     icon: "bi bi-people",
   },
@@ -37,17 +35,7 @@ const navigation = [
     icon: "bi bi-kanban",
   },
   {
-    title: "Pending Tasks",
-    href: "/home/PendingTasks",
-    icon: "bi bi-link",
-  },
-  {
-    title: "Completed Tasks",
-    href: "/home/FacultyProjects",
-    icon: "bi bi-link",
-  },
-  {
-    title: "Reports",
+    title: "Timelines",
     href: "/home/timelines",
     icon: "bi bi-calendar2-week",
   },
@@ -58,7 +46,7 @@ const navigation = [
     icon: "bi bi-file-earmark-break-fill",
   },
   {
-    title: "Setting",
+    title: "Important Links",
     href: "/home/links",
     icon: "bi bi-link",
   },
@@ -88,12 +76,12 @@ const filteredNavigation = navigation?.filter(item => {
 function hasPermission(userType, item) {
   // Define the mapping between user types and permissions
   const userTypePermissions = {
-    Admin: ["Dashboard","Admins","Categories","Employee","Designations","Project","Pending Tasks","Completed Tasks","Reports","Templates","Setting"],
-    // Teacher: ["Home", "Bookings", "Project", "Past Endeavors", "Faculty Projects", "Timelines", "Templates", "Important Links", "Notice Board"],
-    Employee:  ["Home", "Teacher", "Bookings", "Past Endeavors", "Faculty Projects", "Timelines", "Templates", "Important Links", "Notice Board","Notification"]
+    Manager: ["Dashboard", "Admin", "Employee", "Groups", "Project", "Timelines", "Templates", "Important Links", "Notice Board"],
+    Admin : ["Dashboard", "Bookings", "Project", "Timelines", "Templates", "Important Links", "Notice Board"],
+    Employee:  ["Dashboard", "Admin", "Bookings", "Timelines", "Templates", "Important Links", "Notice Board","Notification"]
     // Add more user type-permission mappings as needed
   };
- 
+
   // Check if the user type has permission for the item
   const allowedPermissions = userTypePermissions[userType] || [];
   return allowedPermissions.includes(item.title);

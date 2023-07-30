@@ -5,7 +5,7 @@ import {
     Button,
     Form,
     FormGroup,
-    Label,
+    span,
     Input,
     Alert,
     InputGroup
@@ -13,7 +13,7 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-
+import '../../employee.css';
 import logo1 from '../../images/logo1.jpg'
 
 import { useNavigate, useParams } from 'react-router-dom';
@@ -38,9 +38,11 @@ export function Login() {
        
         let isEmailValid
         let pattern
-        if (type == 'Admin')
-        pattern = /^(admin+)@(uow.edu.pk)/i
-        else 
+        if (type == 'Manager')
+        pattern = /^(manager+)@(manager.com)/i
+        else if (type == 'Admin')
+        pattern = /^([\w.%+-]+)@(admin.com)/i
+        else
         pattern = /^([\w.%+-]+)@(gmail.com)/i
        
 
@@ -65,14 +67,22 @@ export function Login() {
 
   
     return (
+        
         <div>
+           
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</link>
+            {type == "Manager" && (
+                <h1 className='main-heading '>
+                    <i style={{ color: 'primary',marginRight: '10px' }} className="fas fa-user-cog"></i>
+                        Login as Manager <br /><br /></h1>)}
             {type == "Admin" && (
-                <h1 style={{ backgroundColor: 'lightgrey', textAlign: 'center', color: '#21abca' }}>
-                    <i style={{ color: 'lightblue' }} className="fas fa-star"></i>
-                    Login as Administrator <br /><br /></h1>)}
+                <h1 className='main-heading '>
+                      <i style={{ color: 'primary', marginRight: '10px' }} className="fas fa-user-tie"></i>
+                    Login as Administrator<br /><br /></h1>)}
             {type == "Employee" && (
-                <h1 style={{ backgroundColor: 'lightgrey', textAlign: 'center', color: '#21abca' }}>
-                    <i style={{ color: 'lightblue' }} className="fas fa-star"></i>
+                <h1 className='main-heading ' >
+                    <i style={{ color: 'primary',marginRight: '10px' }} className="fas fa-user"></i>
                     Login as Employee<br /><br /></h1>)}
             <CardBody >
                 <div className='text-center'>
@@ -133,7 +143,7 @@ export function Login() {
 
                 <Button
                     className='float-end'
-                    color='primary'
+                    backgroundColor='primary'
                     block
                     style={{ borderRadius: '20px', height: '40px' }}
                     disabled={(emailError && passwordError) ? false : true}

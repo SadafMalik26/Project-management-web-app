@@ -4,6 +4,8 @@ import { faDeleteLeft}  from '@fortawesome/free-solid-svg-icons';
 import { Table, Button, Form, FormGroup, Label, Input,Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useAddPendingTask, usePendingTasks ,useDeletePendingTask} from '../hooks/pendingtasks';
 import { useAuth } from '../hooks/authentication';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
     export const PendingTasks = () => {
@@ -42,11 +44,11 @@ import { useAuth } from '../hooks/authentication';
             const year = new Date(event.target.value).getFullYear();
             setInyear(year.toString().slice(-4));
           };
-        return (
+        return ( 
              
             <div>
-        {auth?.type=="Teacher" ? 
-            <Button className='float-end' color="primary" onClick={()=>setModal(!modal)}><i class="bi bi-plus"></i> <strong>Add Past Endeavors</strong></Button> : "" }
+        {auth?.type=="Manager" ? 
+            <Button className='float-end' color="primary" onClick={()=>setModal(!modal)}><i class="bi bi-plus"></i> <strong>Pending Tasks</strong></Button> : "" }
             
     <Modal isOpen={modal} toggle={()=>setModal(!modal)}>
             <ModalHeader toggle={toggleModal}>Add PendingTask</ModalHeader>
@@ -67,7 +69,7 @@ import { useAuth } from '../hooks/authentication';
 
             <FormGroup>
     <Label for="Description">Description</Label>
-    <textarea type="text"  onChange={(e) => setDescription(e.target.value)}  name="description"id="description"
+    <Editor  type="text"  onChange={(e) => setDescription(e.target.value)}  name="description"id="description"
   placeholder="Enter Description" rows="3"  cols="50" spellcheck="false" autocapitalize="off" autocorrect="off"
   /></FormGroup>
 
@@ -87,18 +89,18 @@ import { useAuth } from '../hooks/authentication';
             </ModalFooter>
             </Modal>
             
-            <h2 style={{ fontSize: "30px" }}>Past Endeavors</h2><br></br>
+            <h2 style={{ fontSize: "30px" }}>Pending Tasks</h2><br></br>
             
             <Table>
             <thead>
             <tr >
             <th><strong>Title</strong></th>
-            <th><strong>Supervisor Name</strong></th>
-            <th><strong>Group Member Name's</strong></th>
+            <th><strong>Supervised By</strong></th>
+            <th><strong>Project Worker</strong></th>
             <th><strong>Description</strong></th>
             <th><strong>Github Link</strong></th>
             <th><strong>In Year</strong></th>
-             {auth?.type=="Admin" ? 
+             {auth?.type=="Manager" ? 
         <th><strong>Actions</strong></th>
         : "" }
           
@@ -112,10 +114,10 @@ import { useAuth } from '../hooks/authentication';
                <td>{pendingtask.supervisorname}</td>
                <td>{pendingtask.membersname}</td>
                <td>{pendingtask.description.split('\n')}</td>
-               <td><a href={pendingtask .url} target="_blank" rel="noopener noreferrer">Go to Past Endeavors </a></td>
+               <td><a href={pendingtask .url} target="_blank" rel="noopener noreferrer">Go to Pending Tasks </a></td>
                <td>{pendingtask.inyear}</td> 
                <td> 
-               {auth?.type=="Teacher" ? 
+               {auth?.type=="Manager" ? 
             <>
             
                 <Button color="danger"  onClick={()=>deletePendingTask.mutate(pendingtask._id)}><FontAwesomeIcon icon={faDeleteLeft} /></Button>{' '}

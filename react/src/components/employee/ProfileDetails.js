@@ -1,11 +1,11 @@
-import { useEmployeeDetails } from "../../hooks/employee";
+import { useEmployeeQualificationDetails } from "../../hooks/employee";
 import {
-   Row, Col, Spinner
+   Row,  Col, Spinner
 } from "reactstrap";
 
 export const ProfileDetails = (props) => {
 
-  const { isLoading, data: employee } = useEmployeeDetails(props.id);
+  const { isLoading, data: employee } = useEmployeeQualificationDetails(props.id);
 
 return(
     <>
@@ -13,11 +13,12 @@ return(
         {isLoading ? <Spinner /> :
           <Row>
             <Col xs={6} md={6}>
-              <div className="employee-details-info"> 
-                <h2 style={{ fontSize: "30px" }}>{employee?.username}</h2><br></br>
-                <p style={{ fontSize: "20px" }}><strong>Email:</strong> {employee?.email}</p>
-                {/* <p style={{ fontSize: "20px" }}><strong>Qualification:</strong> {teacher?.qualification}</p> */}
-               
+              <div className="employee-details-info">
+                <h2>{employee?.username}</h2>
+                <p>Email: {employee?.email}</p>
+                <p>Qualification: {employee?.qualification}</p>
+                <p>Interest: {employee?.interest}</p>
+                <p>Jobtitle: {employee?.jobtitle}</p>
               </div>
             </Col>
             <Col xs={6} md={6}>

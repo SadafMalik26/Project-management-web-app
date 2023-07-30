@@ -17,8 +17,7 @@ export function PreLogin() {
 
     return (
 
-        <CardBody
-        className='loginBG text-center justify-content-between'
+        <CardBody className='loginBG text-center justify-content-between'
         style={{ backgroundColor: 'white' }}
 >
             <div>
@@ -29,23 +28,23 @@ export function PreLogin() {
 
             <Button
                 className='m-2'
+                color='primary'
+                onClick={() => login('Manager')}>
+               Manager
+            </Button>
+
+            <Button
+                className='m-2'
                 color='danger'
                 onClick={() => login('Admin')}>
                 Admin
             </Button>
 
-            {/* <Button
-                className='m-2'
-                color='primary'
-                onClick={() => login('Teacher')}>
-                Teacher
-            </Button> */}
-
             <Button
                 className='m-2'
                 color='warning'
                 onClick={() => login('Employee')}>
-                Employee
+               Employee
             </Button>
 
         </CardBody>

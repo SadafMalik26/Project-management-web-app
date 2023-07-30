@@ -88,7 +88,7 @@ const Header = () => {
         ></img>
         </DropdownToggle>
          <DropdownMenu>
-         {auth?.type != 'Admin' ?  
+         {auth?.type != 'Manager' ?  
        <>
         <Link to="editProfile">
         <DropdownItem>Edit Profile</DropdownItem>

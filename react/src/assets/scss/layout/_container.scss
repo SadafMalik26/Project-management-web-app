@@ -20,7 +20,7 @@
   text-align: center;
   border-radius: 100%;
   &.lg-box {
-    width: 60px;
+    width: 60px; 
     height: 60px;
     font-size: 21px;
     line-height: 60px;
@@ -28,6 +28,7 @@
 }
 .button-group .btn {
   margin: 3px;
+  background-color: green;
 }
 table th {
   font-weight: 500;

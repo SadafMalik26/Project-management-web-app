@@ -1,23 +1,51 @@
 .content-header {
-    background-color: #ffffff; /* Set a light and attractive background color */
-    color: #000000; /* Set the text color */
-    padding: 10px; /* Set 10 pixels of padding */
-    font-size: 24px; /* Set the font size */
-    font-weight: bold; /* Set the font weight */
-    border:1px solid #000000;
-    border-top: 10px solid #1522b2; /* Add a bottom border with 1 pixel width and black color */
-    
-
+  background-color: #ffffff; /* Set a light and attractive background color */
+  color: #000000; /* Set the text color */
+  padding: 10px; /* Set 10 pixels of padding */
+  font-size: 24px; /* Set the font size */
+  font-weight: bold; /* Set the font weight */
+  border: 1px solid #000000;
+  border-top: 10px solid rgba(43, 87, 136, 0.771); /* Add a bottom border with 1 pixel width and black color */
+  width: 500%; /* Set the width of the container to 100% of its parent */
+  height: 500%; /* Set the height of the container to 200 pixels (You can adjust this value as needed) */
 }
-.admin-heading {
-    color: #3273ab; /* Set the desired text color */
+.content-header2 {
+  background-color: #ffffff; /* Set a light and attractive background color */
+  color: #000000; /* Set the text color */
+  padding: 10px; /* Set 10 pixels of padding */
+  font-size: 24px; /* Set the font size */
+  font-weight: bold; /* Set the font weight */
+  border: 1px solid #000000;
+  border-top: 3px solid rgba(43, 87, 136, 0.771); /* Add a bottom border with 1 pixel width and black color */
+  width: 500%; /* Set the width of the container to 100% of its parent */
+  height: 500%; /* Set the height of the container to 200 pixels (You can adjust this value as needed) */
+}
+
+.manager-heading {
+    color: rgba(43, 87, 136, 0.771); /* Set the desired text color */
     font-size: 28px; /* Set the desired font size */
+    font-weight: bold;
+  }
+ 
+  .main-heading {
+    color: rgba(43, 87, 136, 0.771); /* Set the desired text color */
+    font-size: 38px; /* Set the desired font size */
+    background: lightgrey; 
+    text-align: center;
+    color:primary;
+   font-weight: bold;
   }
   
-  .admin-heading i {
+  .manager-heading i {
     margin-right: 10px; /* Adjust the spacing between the icon and the text */
   }
   
+  .sub-heading{
+    color: rgba(43, 87, 136, 0.771); /* Set the desired text color */
+    font-size: 28px; /* Set the desired font size */
+
+  }
+
   .label{
     font-size:18px;
     font-weight: bold;
@@ -36,10 +64,19 @@
      height:50px;
      border-radius:10px ;
      border:3px solid #000000;
-     
-    
+  }
+  .input3{
+    font-size:18px;
+     height:30px;
+     border-radius:10px ;
+     border:3px solid #000000;
   }
 
+  .underline{
+
+     border-bottom: 10px solid rgba(43, 87, 136, 0.771);
+     
+  }
   .alert{
     padding: 10px;
   border: 1px solid #ccc;
@@ -51,3 +88,64 @@
      .form{
       size:100px;
      }
+     .button{
+      float:right;
+     background-color: rgba(43, 87, 136, 0.771);
+     }
+     /* Custom styles for the admin card container */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 20px;
+}
+
+/* Custom styles for the admin card */
+.card-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 10px solid #ccc;
+  border-radius: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Set a fixed height for the card */
+  height: 400px; /* Adjust the height as needed */
+  width:400px;
+}
+
+.card-image {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow:visible;
+  /* Set a fixed height for the image */
+  height: 150px; /* Adjust the height as needed */
+}
+
+.admin-image {
+  width:125px;
+  height:125px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.card-content {
+  padding: 1rem;
+  text-align: center; /* Center the text inside the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.card-text {
+  flex: 2; /* Expand to take available vertical space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.hr1{
+  border-top: 5px solid;
+  border-color: #000000;
+}

@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const get = asyncHandler(async (req, res) => {
     const notices = await Notice.find({})
     if(notices)
-     {
+    {
       res.status(200).json({notices});
 
     }
@@ -25,7 +25,7 @@ try {
 }
 })
 
-  
+
 //delete notice
 const deleteNotice=asyncHandler(async(req,res)=>{
   try {

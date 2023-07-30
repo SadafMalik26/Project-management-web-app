@@ -90,14 +90,14 @@ export const EditProfile = (props) => {
     return(
         <>
         
-        <div className="teacher-details-container mb-4">
+        <div className="admin-details-container mb-4">
         
         <Row>
         {update?.isSuccess ? <Alert>Updated!</Alert>:""}
         {error? <Alert color="danger">Passwords do not match</Alert> : ""}
         
         <Col xs={6} md={6}>
-        <div className="teacher-details-info">
+        <div className="admin-details-info">
         
         <FormGroup>
         <Label for="date">Email</Label>
@@ -202,7 +202,7 @@ export const EditProfile = (props) => {
         </div>
         </Col>
         <Col xs={6} md={6}>
-        <div className="teacher-details-image-container">
+        <div className="admin-details-image-container">
         <img src={`data:image/jpeg;base64,${arrayBufferToBase64(user?.cover?.data?.data)}`} />
         
         </div>

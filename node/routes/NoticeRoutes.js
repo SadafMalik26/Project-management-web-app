@@ -10,5 +10,5 @@ const router = express.Router();
 router.get("/", get);
 router.post("/", add);
 router.delete("/:id", deleteNotice);
- 
+
 module.exports = router;

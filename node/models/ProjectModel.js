@@ -10,7 +10,7 @@ const projectSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add Status"],
     },
-    teacher: {
+    admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user'
     },
@@ -18,14 +18,11 @@ const projectSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add Details"],
     },
-    proposal_document: {
-      data: Buffer
-    },
     requirement_document: {
       data: Buffer,
       
     },
-    prop_document: {
+    proposal_document: {
       data: Buffer
     },
     defense_document: {

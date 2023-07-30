@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #21abca;
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -48,4 +48,10 @@
   background-color: #84bef296;
   box-shadow: 0px 0px 5px 2px #8b8888ba;
 }
+.wrapper{
+  border: 1px solid grey;
+}
 
+.editor{
+  background-color: lavender;
+}

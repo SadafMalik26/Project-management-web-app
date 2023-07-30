@@ -11,13 +11,7 @@ export function Dashboard() {
   
   
   const { data: employeeCount } = useEmployeeCount()
-  const navigation = [
-    {
-      title: <span style={{ color: 'white' }}>Pending Tasks</span>,
-      href: "/Dashboard/PendingTasks",
-      icon: "bi bi-link",
-    },
-  ];
+ 
   
   return (
     <div className="container">
@@ -31,7 +25,7 @@ export function Dashboard() {
     <Col className="col-md-3 mb-3">
   <Card className="custom-card employee-card">
     <h2>{employeeCount}</h2>
-    <CardTitle tag="h4">Admin</CardTitle> 
+    <CardTitle tag="h4">Manager</CardTitle> 
     <br/>
      <CardFooter style={{ backgroundColor: 'rgba(67, 122, 185, 0.771)', textAlign: 'center' }}>
 
@@ -216,13 +210,7 @@ export function Dashboard() {
 </Col>
     </Row>
     
-    <div>
-      {navigation.map((item, index) => (
-        <a key={index} href={item.href}>
-          {item.title} <i className={item.icon}></i>
-        </a>
-      ))}
-    </div>
+   
     <Card className="ongoing-projects-card">
     <CardBody>
       

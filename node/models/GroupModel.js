@@ -2,22 +2,14 @@ const mongoose = require("mongoose");
 
 const groupSchema = mongoose.Schema(
   {
-    employee1: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'user'
-    },
+  
     employee2: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
       required: false,
 
     },
-    employee3: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'user',
-      required: false,
-
-    },
+   
     supervisor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
